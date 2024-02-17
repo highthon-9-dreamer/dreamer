@@ -1,5 +1,7 @@
 package com.highthon.dreamer.domain.series.model
 
+import com.highthon.dreamer.domain.user.model.User
+import com.highthon.dreamer.global.common.basic.entity.BasicTimeEntity
 import jakarta.persistence.*
 
 @Entity
@@ -15,6 +17,13 @@ class Contents (
     var number: Long?,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="series")
-    var series: Series?
-)
+    @JoinColumn(name ="series_id")
+    var series: Series?,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    var user: User?,
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "contents")
+    var replies: List<Reply>?,
+): BasicTimeEntity()

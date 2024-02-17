@@ -37,7 +37,8 @@ class UserService(
                 name = joinRequest.name,
                 introduce = null,
                 email = joinRequest.email,
-                password = encodedPassword
+                password = encodedPassword,
+                contents = null
             )
 
             userRepository.save(joinUserEntity)

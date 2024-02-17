@@ -1,6 +1,7 @@
 package com.highthon.dreamer.domain.series.service
 
 import com.highthon.dreamer.domain.series.controller.request.AddContentRequest
+import com.highthon.dreamer.domain.series.controller.response.ContentsListResponse
 import com.highthon.dreamer.domain.series.exception.SeriesNotFoundException
 import com.highthon.dreamer.domain.series.model.Contents
 import com.highthon.dreamer.domain.series.model.Series
@@ -24,7 +25,9 @@ class ContentsService(
                 title = addContentRequest.title,
                 description = addContentRequest.description,
                 number = 1,
-                series = null
+                series = null,
+                user = null,
+                replies = null
             )
             if (it.seriesId == null) {
                 val contents = ArrayList<Contents>()
@@ -46,5 +49,16 @@ class ContentsService(
                 ?: throw SeriesNotFoundException()
 
             series.contents = series.contents!! + content
+        }
+
+    fun list() =
+        contentsRepository.findAll().map {
+            ContentsListResponse(
+                it.title!!,
+                it.createdAt!!,
+                it.replies!!.size,
+                it.user!!.name!!,
+                it.user!!.id!!
+            )
         }
 }
