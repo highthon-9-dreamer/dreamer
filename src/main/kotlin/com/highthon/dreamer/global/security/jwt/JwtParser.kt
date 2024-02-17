@@ -16,11 +16,11 @@ class JwtParser(
      * prefix 없으면 null 리턴
      */
     fun parseAccessToken(request: HttpServletRequest): String? =
-        request.getHeader("Auth-Token")
+        request.getHeader("X-Auth-Token")
             .let { it ?: return null }
             .let {
                 if (it.startsWith(jwtProperties.jwtPrefix))
-                    it.replace(jwtProperties.jwtPrefix, "")
+                    it.replace(jwtProperties.jwtPrefix, "").trim()
                 else null
             }
 
