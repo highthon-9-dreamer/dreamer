@@ -20,7 +20,7 @@ class UserService(
 ) {
     fun login(loginRequest: LoginRequest) =
         userRepository.findOneByEmail(loginRequest.email).let {
-            if (!passwordEncoder.matches(loginRequest.password, it!!.password))
+            if (it == null || !passwordEncoder.matches(loginRequest.password, it!!.password))
                 throw UserNotFoundException()
 
             jwtGenerator.generate(it.id.toString())

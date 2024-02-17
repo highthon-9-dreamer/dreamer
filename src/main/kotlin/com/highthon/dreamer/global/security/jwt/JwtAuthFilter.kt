@@ -18,21 +18,17 @@ class JwtAuthFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        try {
-            val accessToken = jwtParser.parseAccessToken(request)
-            if (!accessToken.isNullOrBlank()) {
-                val userEmail = jwtParser.authentication(accessToken, true)
-                SecurityContextHolder.clearContext()
+        val accessToken = jwtParser.parseAccessToken(request)
+        if (!accessToken.isNullOrBlank()) {
+            val userEmail = jwtParser.authentication(accessToken, true)
+            SecurityContextHolder.clearContext()
 
-                val userDetails = principalDetailsService.loadUserByUsername(userEmail)
+            val userDetails = principalDetailsService.loadUserByUsername(userEmail)
 
-                val securityContext = SecurityContextHolder.getContext()
-                securityContext.authentication = UsernamePasswordAuthenticationToken(userDetails, "", ArrayList())
-            }
-
-            filterChain.doFilter(request, response)
-        } catch (e: UserNotFoundException) {
-            response.sendError(e.errorCode.code.value(), e.errorCode.msg)
+            val securityContext = SecurityContextHolder.getContext()
+            securityContext.authentication = UsernamePasswordAuthenticationToken(userDetails, "", ArrayList())
         }
+
+        filterChain.doFilter(request, response)
     }
 }

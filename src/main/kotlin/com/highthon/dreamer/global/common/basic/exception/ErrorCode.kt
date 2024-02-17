@@ -18,4 +18,6 @@ enum class ErrorCode(
     SERVICE_CONFLICT_ERROR("이미 존재하는 서비스 입니다", HttpStatus.CONFLICT),
     SERIES_NOT_FOUND_ERROR("시리즈를 찾을 수 없습니다.", HttpStatus.NO_CONTENT),
     CONTENTS_NOT_FOUND_ERROR("컨텐츠를 찾을 수 업습니다.", HttpStatus.NO_CONTENT),
+    JWT_EXPIRE_ERROR("토큰이 만료되었습니다.", HttpStatus.UNAUTHORIZED),
+    LOGIN_INFO_NOT_FOUND_ERROR("로그인 정보의 유저를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST),
 }

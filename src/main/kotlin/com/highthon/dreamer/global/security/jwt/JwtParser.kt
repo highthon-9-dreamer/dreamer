@@ -1,7 +1,9 @@
 package com.highthon.dreamer.global.security.jwt
 
 import com.highthon.dreamer.global.security.exception.ForbiddenException
+import com.highthon.dreamer.global.security.exception.JwtExpireException
 import io.jsonwebtoken.Claims
+import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Component
@@ -34,10 +36,15 @@ class JwtParser(
             getTokenBody(accessOrRefreshToken, secret).subject ?: throw ForbiddenException()
         }
 
-    private fun getTokenBody(token: String, secret: Key): Claims =
-        Jwts.parserBuilder()
-            .setSigningKey(secret)
-            .build()
-            .parseClaimsJws(token)
-            .body
+    private fun getTokenBody(token: String, secret: Key): Claims {
+        try {
+            return Jwts.parserBuilder()
+                .setSigningKey(secret)
+                .build()
+                .parseClaimsJws(token)
+                .body
+        } catch (e: ExpiredJwtException) {
+            throw JwtExpireException()
+        }
+    }
 }
