@@ -1,6 +1,5 @@
 package com.highthon.dreamer.global.security.principal
 
-import com.highthon.dreamer.domain.user.exception.UserNotFoundException
 import com.highthon.dreamer.domain.user.repository.UserRepository
 import com.highthon.dreamer.global.common.basic.exception.NotEnoughDataException
 import com.highthon.dreamer.global.security.exception.LoginInfoNotFoundException

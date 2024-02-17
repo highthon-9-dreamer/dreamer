@@ -2,7 +2,7 @@ package com.highthon.dreamer.domain.series.controller.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 data class ContentsListResponse (
 

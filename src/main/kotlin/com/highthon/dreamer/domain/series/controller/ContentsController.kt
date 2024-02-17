@@ -6,11 +6,7 @@ import com.highthon.dreamer.global.common.basic.response.BasicResponse
 import com.highthon.dreamer.global.security.principal.PrincipalDetails
 import jakarta.validation.Valid
 import org.springframework.security.core.annotation.AuthenticationPrincipal
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/c")
@@ -30,4 +26,8 @@ class ContentsController(
     @GetMapping("/list")
     fun list() =
         BasicResponse.ok(contentsService.list())
+
+    @GetMapping("/{contentsId}")
+    fun detail(@PathVariable("contentsId") contentsId: Long) =
+        BasicResponse.ok(contentsService.detail(contentsId))
 }

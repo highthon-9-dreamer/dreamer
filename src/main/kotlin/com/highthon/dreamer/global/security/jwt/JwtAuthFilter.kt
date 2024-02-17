@@ -1,6 +1,5 @@
 package com.highthon.dreamer.global.security.jwt
 
-import com.highthon.dreamer.domain.user.exception.UserNotFoundException
 import com.highthon.dreamer.global.security.principal.PrincipalDetailsService
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest

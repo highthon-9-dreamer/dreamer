@@ -3,7 +3,7 @@ package com.highthon.dreamer.domain.series.model
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.highthon.dreamer.global.common.basic.entity.BasicTimeEntity
 import jakarta.persistence.*
-import java.util.UUID
+import java.util.*
 
 @Entity
 class Series (
