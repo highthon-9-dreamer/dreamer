@@ -4,6 +4,7 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
+@Table(name = "`name`")
 class User (
     @Id
     @Column(name = "userId")

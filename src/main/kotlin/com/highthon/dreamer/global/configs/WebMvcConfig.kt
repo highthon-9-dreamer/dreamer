@@ -12,7 +12,7 @@ class WebMvcConfig : WebMvcConfigurer {
         registry.addMapping("/**")
             .allowedOrigins("http://localhost")
             .allowCredentials(true)
-            .exposedHeaders("X-Auth-Token", "X-Refresh-Token")
+            .exposedHeaders("Auth-Token")
             .allowedMethods(*ALLOWED_METHOD_NAMES.split(",".toRegex()).dropLastWhile { it.isEmpty() }
                 .toTypedArray())
     }
