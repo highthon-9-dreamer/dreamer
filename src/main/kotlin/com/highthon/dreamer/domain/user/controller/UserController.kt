@@ -8,7 +8,11 @@ import com.highthon.dreamer.global.security.jwt.dto.TokenDto
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
+@RestController
+@RequestMapping("/u")
 class UserController(
     private val userService: UserService
 ) {
