@@ -22,9 +22,15 @@ spring:
 
 server:
   port: 8080
+  ssl:
+    enabled: true
+    key-alias: ayokeystore
+    key-store: ayokeystore.pkcs12
+    key-store-password: '123456'
+    key-password: '123456'
+    trust-store: ayotrust.pkcs12
+    trust-store-password: '123456'
 
 jwt:
   accessSecret: 'ODZiYzdmYzUtOWJkOC00MWZkLWI2MjktZWJmZTFmODg5YWE5ODZiYzdmYzUtOWJkOC00MWZkLWI2MjktZWJmZTFmODg5YWE5ODZiYzdmYzUtOWJkOC00MWZkLWI2MjktZWJmZTFmODg5YWE5'
-  accessExp: 1800
-  refreshSecret: 'Y2Y3MTQ1N2EtMWQwYy00MTlhLWE2ODgtZDljMThmNDgyNzQ4ODZiYzdmYzUtOWJkOC00MWZkLWI2MjktZWJmZTFmODg5YWE5ODZiYzdmYzUtOWJkOC00MWZkLWI2MjktZWJmZTFmODg5YWE5'
-  refreshExp: 7200
+  accessExp: 100000

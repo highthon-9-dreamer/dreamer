@@ -33,7 +33,7 @@ data class ContentDetailsResponse
             @JsonProperty("Email")
             val email: String,
             @JsonProperty("Introduce")
-            val introduce: String,
+            val introduce: String?,
         )
 
         class Reply

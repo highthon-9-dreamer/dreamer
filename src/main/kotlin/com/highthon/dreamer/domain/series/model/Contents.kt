@@ -12,6 +12,7 @@ class Contents (
     var id: Long?,
 
     var title: String?,
+    @Lob
     var description: String?,
 
     var number: Long?,

@@ -103,7 +103,7 @@ class ContentsService(
                     profile = it.user!!.profile!!,
                     name = it.user!!.name!!,
                     email = it.user!!.email!!,
-                    introduce = it.user!!.introduce!!
+                    introduce = it.user!!.introduce
                 ),
                 replies = replies
             )

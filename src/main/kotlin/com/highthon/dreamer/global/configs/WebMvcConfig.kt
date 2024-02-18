@@ -10,7 +10,7 @@ class WebMvcConfig : WebMvcConfigurer {
 
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedOrigins("*")
+            .allowedOrigins("https://dreamer-frontend-chi.vercel.app")
 //            .allowCredentials(false)
             .allowedHeaders("*")
             .exposedHeaders("*")
