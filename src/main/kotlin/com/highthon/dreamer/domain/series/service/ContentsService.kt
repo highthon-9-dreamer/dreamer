@@ -9,6 +9,9 @@ import com.highthon.dreamer.domain.series.model.Contents
 import com.highthon.dreamer.domain.series.model.Series
 import com.highthon.dreamer.domain.series.repository.ContentsRepository
 import com.highthon.dreamer.domain.series.repository.SeriesRepository
+import com.highthon.dreamer.domain.user.exception.UserNotFoundException
+import com.highthon.dreamer.domain.user.repository.UserRepository
+import jakarta.persistence.EntityManager
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -18,39 +21,52 @@ import java.util.*
 @Transactional
 class ContentsService(
     private val seriesRepository: SeriesRepository,
-    private val contentsRepository: ContentsRepository
+    private val contentsRepository: ContentsRepository,
+    private val userRepository: UserRepository,
+    private val em: EntityManager
 ) {
-    fun add(addContentRequest: AddContentRequest, userId: UUID) =
+    fun add(addContentRequest: AddContentRequest, userEmail: String): Long? =
         addContentRequest.let {
+            val user = userRepository.findOneByEmail(userEmail) ?: throw UserNotFoundException()
+
             val content = Contents(
                 id = null,
                 title = addContentRequest.title,
                 description = addContentRequest.description,
-                number = 1,
+                number = null,
                 series = null,
-                user = null,
+                user = user,
                 replies = null
             )
             if (it.seriesId == null) {
                 val contents = ArrayList<Contents>()
-                contents.add(content)
+                content.number = 1
 
-                seriesRepository.save(
-                    Series(
-                        id = null,
-                        title = it.seriesTitle,
-                        contents = contents,
-                        userId = userId,
-                        lastNumber = 1)
+                val series = Series(
+                    id = null,
+                    title = it.seriesTitle,
+                    contents = contents,
+                    userId = user.id,
+                    lastNumber = 1
                 )
+                content.series = series
+                contents.add(content)
+                seriesRepository.save(series)
 
-                return
+                em.flush()
+                return content.id
+            } else {
+                val series = seriesRepository.findByIdOrNull(addContentRequest.seriesId)
+                    ?: throw SeriesNotFoundException()
+
+                content.series = series
+                content.number = series.lastNumber!! + 1L
+                series.contents = series.contents!! + content
+
+                em.flush()
+                return content.id
             }
 
-            val series = seriesRepository.findByIdOrNull(addContentRequest.seriesId)
-                ?: throw SeriesNotFoundException()
-
-            series.contents = series.contents!! + content
         }
 
     fun list() =
@@ -92,4 +108,8 @@ class ContentsService(
                 replies = replies
             )
         }
+
+    fun search(keyword: String) =
+        contentsRepository.findAllByTitleLikeIgnoreCase(keyword)
+
 }

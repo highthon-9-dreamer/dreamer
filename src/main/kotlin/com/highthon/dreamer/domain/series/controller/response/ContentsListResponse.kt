@@ -15,5 +15,5 @@ data class ContentsListResponse (
     @JsonProperty("WritedBy")
     val writedBy: String,
     @JsonProperty("WritedById")
-    val writedById: UUID,
+    val writedById: Long,
 )

@@ -15,7 +15,7 @@ class PrincipalDetailsService(
 ): UserDetailsService {
     override fun loadUserByUsername(username: String?): UserDetails =
         if (!username.isNullOrBlank()) PrincipalDetails(
-            userRepository.findByIdOrNull(UUID.fromString(username)) ?:
+            userRepository.findByIdOrNull(username.toLong()) ?:
             throw LoginInfoNotFoundException()
         ) else throw NotEnoughDataException()
 }

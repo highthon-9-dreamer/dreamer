@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ContentsRepository: JpaRepository<Contents, Long> {
-
+    fun findAllByTitleLikeIgnoreCase(title: String): List<Contents>
 }

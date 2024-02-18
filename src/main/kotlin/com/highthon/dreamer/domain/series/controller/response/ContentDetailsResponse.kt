@@ -25,7 +25,7 @@ data class ContentDetailsResponse
         class User
         @QueryProjection constructor (
             @JsonProperty("UserId")
-            val userId: UUID,
+            val userId: Long,
             @JsonProperty("Profile")
             val profile: String,
             @JsonProperty("Name")
@@ -45,7 +45,7 @@ data class ContentDetailsResponse
             @JsonProperty("Content")
             val content: String,
             @JsonProperty("UserId")
-            val userId: UUID
+            val userId: Long
         )
     }
 }

@@ -10,7 +10,7 @@ class Reply (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reply_id")
     var id: Long?,
-    var userId: UUID?,
+    var userId: Long?,
     var content: String?,
 
     @JsonIgnore

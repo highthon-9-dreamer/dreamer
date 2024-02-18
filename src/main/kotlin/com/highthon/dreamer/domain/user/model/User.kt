@@ -8,9 +8,9 @@ import java.util.*
 @Table(name = "`name`")
 class User (
     @Id
-    @Column(name = "userId")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    var id: UUID?,
+    @Column(name = "userId", updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long?,
     var profile: String?,
     var name: String?,
     var email: String?,

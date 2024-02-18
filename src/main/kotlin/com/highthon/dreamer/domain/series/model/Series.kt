@@ -20,7 +20,7 @@ class Series (
     var lastNumber: Long?,
 
     @Column(updatable = false, nullable = false)
-    var userId: UUID?,
+    var userId: Long?,
 
     @OneToMany(
         cascade = [CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE],

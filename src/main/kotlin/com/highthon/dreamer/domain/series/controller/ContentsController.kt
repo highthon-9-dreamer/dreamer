@@ -19,13 +19,18 @@ class ContentsController(
         @RequestBody @Valid addContentRequest: AddContentRequest,
         @AuthenticationPrincipal principalDetails: PrincipalDetails
         ) =
-        contentsService.add(addContentRequest, principalDetails.user.id!!).let {
-            BasicResponse.created("생성되었습니다.")
+        contentsService.add(addContentRequest, principalDetails.user.email!!).let {
+            BasicResponse.created(it.toString())
+
         }
 
     @GetMapping("/list")
     fun list() =
         BasicResponse.ok(contentsService.list())
+
+    @GetMapping("/search")
+    fun search(@RequestParam(name = "keyword") keyword: String) =
+        BasicResponse.ok(contentsService.search(keyword))
 
     @GetMapping("/{contentsId}")
     fun detail(@PathVariable("contentsId") contentsId: Long) =

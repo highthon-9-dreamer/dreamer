@@ -17,11 +17,11 @@ class Contents (
     var number: Long?,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="series_id")
+    @JoinColumn(name ="series_id", nullable = false)
     var series: Series?,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     var user: User?,
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "contents")

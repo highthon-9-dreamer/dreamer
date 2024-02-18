@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 interface SeriesRepository: JpaRepository<Series, Long> {
-    fun findAllByUserIdOrderByUpdatedAt(userId: UUID): List<Series>
+    fun findAllByUserIdOrderByUpdatedAt(userId: Long): List<Series>
 }
